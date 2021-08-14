@@ -40,25 +40,22 @@ CREATE TABLE IF NOT EXISTS characteristic_reviews (
   value INT NOT NULL
 );
 
-
 \COPY review(id, product_id, rating, date, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness)
-  FROM '/Users/nvaline/Documents/hackreactor/SDC/Apollo/Catwalk/database/csv/reviews.csv'
+  FROM '/Users/nvaline/Documents/hackreactor/SDC/rating-review/db/csv/reviews.csv'
   DELIMITER ','
   CSV HEADER;
-
 
 \COPY photos(id, review_id, url)
-  FROM '/Users/nvaline/Documents/hackreactor/SDC/Apollo/Catwalk/database/csv/reviews_photos.csv'
+  FROM '/Users/nvaline/Documents/hackreactor/SDC/rating-review/db/csv/reviews_photos.csv'
   DELIMITER ','
   CSV HEADER;
 
-
 \COPY characteristics(id, product_id, name)
-  FROM '/Users/nvaline/Documents/hackreactor/SDC/Apollo/Catwalk/database/csv/characteristics.csv'
+  FROM '/Users/nvaline/Documents/hackreactor/SDC/rating-review/db/csv/characteristics.csv'
   DELIMITER ','
   CSV HEADER;
 
 \COPY characteristic_reviews(id, characteristic_id, review_id, value)
-  FROM '/Users/nvaline/Documents/hackreactor/SDC/Apollo/Catwalk/database/csv/characteristic_reviews.csv'
+  FROM '/Users/nvaline/Documents/hackreactor/SDC/rating-review/db/csv/characteristic_reviews.csv'
   DELIMITER ','
   CSV HEADER;
