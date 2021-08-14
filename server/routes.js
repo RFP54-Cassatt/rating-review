@@ -1,16 +1,15 @@
 const controller = require('./controllers');
 const router = require('express').Router();
 
-//router.get('/somethingHere', controller.messages.get);
+router.get('/review', controller.get.reviews);
 
-// router.get('/messages', controller.messages.get);
+router.get('/review/meta', controller.get.meta);
 
-// router.post('/messages', controller.messages.post);
+router.post('/reviews', controller.post.review);
 
-// router.get('/users', controller.users.get);
+router.put('/reviews/:review_id/helpful', controller.put.helpful);
 
-// router.post('/users', controller.users.post);
-
+router.put('/reviews/:review_id/report', controller.put.report);
 
 module.exports = router;
 

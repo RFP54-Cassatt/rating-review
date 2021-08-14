@@ -7,12 +7,12 @@ const db = require('./db');
 const router = require('./routes.js');
 
 const app = express();
-const PORT = 3113;
+const PORT = 3113;//THIS MAY NEED TO BE THE SAME AS THE DB PORT 5324?
 
 app.use(morgan('dev'));
 app.use(express.json());
 
-// app.use('/', router);
+app.use('/', router);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
