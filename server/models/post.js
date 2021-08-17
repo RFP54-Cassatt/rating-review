@@ -40,19 +40,29 @@ module.exports = {
               ($1, $2, $3)`;
         await db.none(photoQuery, [photo_id, photo, review_id]);
         photo_id++;
-
       }
 
       //INSERT INTO CHARACTERISTICS /////////
       const getCharsId  = 'SELECT MAX( id ) FROM characteristics;';
       let [{ max: chars_id }] = await db.query(getCharsId);
+      console.log(chars_id)
       chars_id++;
 
-      const charsQuery = `INSERT INTO
-        characteristics ()
+      const charsQuery =
+        `INSERT INTO
+          characteristics ()
       `;
 
       //INSERT INTO CHARACTERISTIC_REVIEWS /////////
+      const getCharsRvId  = 'SELECT MAX( id ) FROM characteristic_reviews;';
+      let [{ max: charsRv_id }] = await db.query(getCharsRvId);
+      console.log(charsRv_id)
+      charsRv_id++;
+
+      const charsRvQuery =
+        `INSERT INTO
+      `;
+
     }
     catch (err) { return err; }
   }
