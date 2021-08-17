@@ -45,9 +45,12 @@ CREATE TABLE IF NOT EXISTS characteristic_reviews (
 --   FROM '/Users/nvaline/Documents/hackreactor/SDC/rating-review/server/db/csv/reviews.csv'
 --   DELIMITER ','
 --   CSV HEADER;
---   CREATE INDEX product_idx ON reviews (product_id, reported);
+--   CREATE INDEX product_idx ON reviews (product_id);
 --   CREATE INDEX date_idx ON reviews (date);
 --   CREATE INDEX reported_idx ON reviews (reported);
+--   CREATE INDEX recommend_idx ON reviews (recommend);
+--   CREATE INDEX reviewerName_idx ON reviews (review_name);
+
 
 
 -- \COPY photos(id, review_id, url)
@@ -55,17 +58,21 @@ CREATE TABLE IF NOT EXISTS characteristic_reviews (
 --   DELIMITER ','
 --   CSV HEADER;
 --   CREATE INDEX review_idx ON photos (review_id);
+--   CREATE INDEX url_idx ON photos (url);
 
 
 -- \COPY characteristics(id, product_id, name)
 --   FROM '/Users/nvaline/Documents/hackreactor/SDC/rating-review/server/db/csv/characteristics.csv'
 --   DELIMITER ','
 --   CSV HEADER;
---   CREATE INDEX product_index ON characteristics (product_id)
+--   CREATE INDEX product_index ON characteristics (product_id);
+--   CREATE INDEX charName_indx ON characteristics (name);
 
 
 -- \COPY characteristic_reviews(id, characteristic_id, review_id, value)
 --   FROM '/Users/nvaline/Documents/hackreactor/SDC/rating-review/server/db/csv/characteristic_reviews.csv'
 --   DELIMITER ','
 --   CSV HEADER;
---   CREATE INDEX char_idx ON characteristic_reviews (characteristic_id)
+--   CREATE INDEX char_idx ON characteristic_reviews (characteristic_id);
+--   CREATE INDEX charVal_idx ON characteristic_reviews (value);
+--   CREATE INDEX charReview_idx ON characteristic_reviews (review_id);

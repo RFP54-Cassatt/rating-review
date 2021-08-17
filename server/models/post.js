@@ -61,6 +61,7 @@ module.exports = {
 
       const charsRvQuery =
         `INSERT INTO
+          characteristic_reviews ()
       `;
 
     }
