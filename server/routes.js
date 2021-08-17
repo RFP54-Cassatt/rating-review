@@ -1,9 +1,9 @@
 const controller = require('./controllers');
 const router = require('express').Router();
 
-router.get('/review', controller.get.reviews);
+router.get('/reviews', controller.get.reviews);
 
-router.get('/review/meta', controller.get.meta);
+router.get('/reviews/meta', controller.get.meta);
 
 router.post('/reviews', controller.post.review);
 
