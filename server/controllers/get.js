@@ -8,7 +8,7 @@ module.exports = {
   },
   meta: (req, res) => {
     get.meta(req.query)
-      .then(data => res.status(200).send(data))
+      .then(data => res.status(200).json(data))
       .catch(err => res.sendStatus(400))
   }
 };

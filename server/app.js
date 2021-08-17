@@ -1,7 +1,7 @@
-require('newrelic');
 const express = require('express');
 const Router = express.Router();
 const morgan = require('morgan');
+require('newrelic');
 
 //Connect to database
 const db = require('./db');
@@ -10,7 +10,7 @@ const db = require('./db');
 const router = require('./routes.js');
 
 const app = express();
-const PORT = 3113;//THIS MAY NEED TO BE THE SAME AS THE DB PORT 5324?
+const PORT = 3113;
 
 //diagnostic middleware
 app.use(morgan('dev'));

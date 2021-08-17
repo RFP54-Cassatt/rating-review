@@ -35,57 +35,48 @@ module.exports = {
     }
   },
   meta: async ({ product_id }) => {
-    const query =
-      `SELECT
-        characteristics.product_id,
-        characteristics.name,
-        characteristic_reviews.value,
-        characteristic_reviews.id,
-        reviews.rating,
-        reviews.recommend,
-        characteristic_reviews.value
-      FROM characteristics
-        INNER JOIN characteristic_reviews ON characteristics.id = characteristic_reviews.characteristic_id
-        INNER JOIN reviews ON reviews.id = characteristic_reviews.review_id
-      WHERE reviews.product_id = $1
-      GROUP BY
-        characteristics.product_id,
-        characteristics.name,
-        characteristic_reviews.value,
-        characteristic_reviews.id,
-        reviews.rating,
-        reviews.recommend `;
+    const getMeta =`
+    SELECT
+      characteristics.product_id,
+      characteristics.name,
+      characteristic_reviews.value,
+      characteristic_reviews.id,
+      reviews.rating,
+      reviews.recommend,
+      characteristic_reviews.value
+    FROM characteristics
+    INNER JOIN characteristic_reviews ON characteristics.id = characteristic_reviews.characteristic_id
+    INNER JOIN reviews ON reviews.id = characteristic_reviews.review_id
+    WHERE reviews.product_id = $1
+    GROUP BY
+      characteristics.product_id,
+      characteristics.name,
+      characteristic_reviews.value,
+      characteristic_reviews.id,
+      reviews.rating,
+      reviews.recommend;`;
+    try{
+      const reviews_meta = await db.query(getMeta, [product_id]);
+      const api_meta = reviews_meta.reduce((obj, meta) => {
 
-      try {
-        const reviews_meta = await db.query(query,[product_id]);
-        const api_meta = reviews_meta.reduce((obj, review) => {
-          const {
-            product_id,
-            name,
-            value,
-            id,
-            rating,
-            recommend
-          } = review;
+        const { product_id, name, value, id, rating, recommend } = meta;
 
-          obj['product_id']  = `${product_id}`;
-          obj['ratings']     = {...obj['ratings'], [rating]:0};
-          obj['recommended'] = {...obj['recommended'], [recommend]:value};
-
-          obj['characteristics'] = reviews_meta.reduce((obj2, {id,value,name}) => {
-            obj2[name] = {id,value}; return obj2 }, {});
-            return obj;
+        obj['product_id'] = `${product_id}`;
+        obj['ratings'] = {...obj['ratings'], [rating]:0};
+        obj['recommended'] = {...obj['recommended'], [recommend ? Number(0) : Number(1)] : value};
+        obj['characteristics'] =
+          reviews_meta.reduce((obj2, {id, value, name}) => {
+            obj2[name] = {id, value};
+            return obj2
           }, {});
-          obj['ratings'] = reviews_meta.reduce((acc, { rating }) => {
-            rating in acc ? acc[rating] += 1: acc[rating] = 1;
-            return acc;
-          }, {});
+          return obj;
+      },{});
 
-          return api_meta;
-        }
-        catch (err) {
-          return err;
-        }
+      return api_meta;
     }
+    catch(err) { console.log('ERROR: ', err) }
 
-};
+  }
+}
+
+

@@ -46,8 +46,9 @@ CREATE TABLE IF NOT EXISTS characteristic_reviews (
 --   DELIMITER ','
 --   CSV HEADER;
 --   CREATE INDEX product_idx ON reviews (product_id);
---   CREATE INDEX date_idx ON reviews (date);
+--   CREATE INDEX productReport_idx ON reviews (product_id, reported);
 --   CREATE INDEX reported_idx ON reviews (reported);
+--   CREATE INDEX date_idx ON reviews (date);
 --   CREATE INDEX recommend_idx ON reviews (recommend);
 --   CREATE INDEX reviewerName_idx ON reviews (review_name);
 
